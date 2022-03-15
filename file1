@@ -1,0 +1,30 @@
+{
+    "Id": "PolicyId2",
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "AllowIPmix",
+            "Effect": "Allow",
+            "Principal": "*",
+            "Action": "s3:*",
+            "Resource": [
+                "arn:aws:s3:::DOC-EXAMPLE-BUCKET",
+                "arn:aws:s3:::DOC-EXAMPLE-BUCKET/*"
+            ],
+            "Condition": {
+                "IpAddress": {
+                    "aws:SourceIp": [
+                        "54.240.143.0/24",
+                        "2001:DB8:1234:5678::/64"
+                    ]
+                },
+                "NotIpAddress": {
+                    "aws:SourceIp": [
+                        "54.240.143.128/30",
+                        "2001:DB8:1234:5678:ABCD::/80"
+                    ]
+                }
+            }
+        }
+    ]
+}
